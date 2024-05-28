@@ -42,8 +42,7 @@ ENV PATH=$PYTHONUSERBASE/bin:$PATH
 RUN curl https://cli-assets.heroku.com/install.sh | sh
 
 # Setup MongoDB (4.4 from Focal repos)
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
-    sudo apt-get install -y links  && \
+RUN sudo apt-get install -y links  && \
     sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/* /home/gitpod/*.deb && \
     sudo chown -R gitpod:gitpod /home/gitpod/.cache/heroku/
 
