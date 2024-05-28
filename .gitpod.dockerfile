@@ -42,7 +42,13 @@ ENV PATH=$PYTHONUSERBASE/bin:$PATH
 RUN curl https://cli-assets.heroku.com/install.sh | sh
 
 # Setup MongoDB (4.4 from Focal repos)
-RUN sudo apt-get install -y links  && \
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb && \
+    sudo apt-get install gnupg && \
+    curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor && \
+    echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list && \
+    sudo apt-get update -y  && \
+    sudo apt-get install -y mongodb-org-shell=4.4.29  && \
+    sudo apt-get clean -y && \
     sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/* /home/gitpod/*.deb && \
     sudo chown -R gitpod:gitpod /home/gitpod/.cache/heroku/
 
