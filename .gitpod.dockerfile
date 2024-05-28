@@ -49,6 +49,7 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1
     sudo apt-get update -y  && \
     sudo apt-get install -y mongodb-mongosh  && \
     sudo apt-get clean -y && \
+    sudo apt-get install -y links && \
     sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/* /home/gitpod/*.deb && \
     sudo chown -R gitpod:gitpod /home/gitpod/.cache/heroku/
 
